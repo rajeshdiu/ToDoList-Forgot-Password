@@ -1,0 +1,113 @@
+{% include 'base.html' %}
+
+<style>
+ 
+    h1 {
+        color: #333;
+    }
+
+    .task-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .task-table th, .task-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .task-table th {
+        background-color: #f2f2f2;
+    }
+
+    .task-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .task-table a {
+        display: inline-block;
+        margin-right: 5px;
+        padding: 5px 10px;
+        text-decoration: none;
+        background-color: #4caf50;
+        color: #fff;
+        border-radius: 3px;
+        transition: background-color 0.3s;
+    }
+
+    .task-table a:hover {
+        background-color: #45a049;
+    }
+</style>
+
+{% block content %}
+<br>
+<br>
+<div class="search-box">
+    <form method="get" action="{% url 'searchTaskPage' %}">
+        <input type="text" name="search" placeholder="Search tasks">
+
+        <button type="submit">Search By Title</button>
+    </form>
+</div>
+
+
+    <h1>Your To-Do List</h1>
+
+    <div>
+        <form method="get" action="{% url 'searchTaskPage' %}">
+            <label for="category-filter">Select Category:</label>
+            <select id="category-filter" name="category">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="success-message">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+    
+
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Priority</th>
+                <th>Category</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{task.category}}</td>
+                    
+                    <td>{% if task.completed %}Completed{% else %}Not-Completed{% endif %}</td>
+                    <td>
+                        <a href="{% url 'taskEditPage' task.id %}">Edit</a>
+                        <a href="{% url 'taskDeletePage' task.id %}">Delete</a>
+                        <hr>
+                        <a href="{% url 'TaskCompleteViewPage' task.id %}">Mark as Complete</a>
+                    </td>
+                </tr>   
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

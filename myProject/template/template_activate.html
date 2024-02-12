@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<html>
+    <body>
+    
+        <h1>
+            Hi{{user.username}}, 
+            please click http://{{domain}}{% url 'activate' uid64=uid token=token%}
+        
+        </h1>
+        
+        </body>
+</html>
+
+{% endblock %}

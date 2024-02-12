@@ -1,0 +1,13 @@
+
+{% include 'base.html' %}
+
+
+{% block content %}
+
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Task</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,19 @@
+
+{% include 'base.html' %}
+
+
+{% block content %}
+
+
+    <form method="POST" action="{% url 'create_categoryPage' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Category</button>
+       
+    </form>
+    
+{% endblock %}
+
+   
+    
+

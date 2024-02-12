@@ -1,0 +1,15 @@
+{% load static %}
+{% load notifications_tags %}
+
+
+<ul>
+    <li><a class="active" href="{% url "dashBoardPage" %}">Home</a></li>
+    <li><a class="active" href="{% url "create_taskPage" %}">Create Task</a></li>
+    <li><a class="active" href="{% url "create_categoryPage" %}">Create Category</a></li>
+    <li><a class="active" href="{% url "Category_List" %}">Category List</a></li>
+    <li><a class="active" href="{% url "task_listPage" %}">Task List</a></li>
+    <li style="float:right"><a class="active" href="{% url "logoutPage" %}">Log out</a></li>
+    <li style="float:right"><i class="fas fa-bell notification-icon"></i><a class="active" href="{% url "notifications_page" %}">Notifications</a></li>
+</ul>
+
+

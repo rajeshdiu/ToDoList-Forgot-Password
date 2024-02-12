@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% for notification in notifications %}
+    <div class="notification">
+        <p>{{ notification.message }}</p>
+        
+    </div>
+{% empty %}
+    <p>No notifications to Display.</p>
+{% endfor %}
+{% endblock %}
